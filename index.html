@@ -1,35 +1,29 @@
 <!DOCTYPE html>
-<html lang="nl" dir="ltr">
+<html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <link rel="stylesheet" href="style.css">
+    <title>bmi</title>
   </head>
   <body>
+    <h1>BMI calculator</h1>
+    <label for="gewicht">gewicht:</label>
+    <input type="text" id="gewicht" placeholder="80"><br>
+    <label for="lengte">lengte in cm:</label>
+    <input type="text" id="lengte" placeholder="100"><br>
+    <input type="button" id="bereken" value ="compute BMI">
+    <div id="resultaat">hier komt de bmi</div>
+    <script type="text/javascript" src="ajax.js"></script>
     <script>
-    function showHint(str) {
-        if (str.length == 0) {
-            document.getElementById("txtHint").innerHTML = "";
-            return;
-        } else {
-            var xmlhttp = new XMLHttpRequest();
-            xmlhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    document.getElementById("txtHint").innerHTML = this.responseText;
-                }
-            };
-            xmlhttp.open("GET", "gethint.php?q=" + str, true);
-            xmlhttp.send();
-        }
-    }
+        let lengte = document.getElementById('lengte');//bind aan JS
+        let gewicht = document.getElementById('gewicht');//bind aan JS
+        let bereken = document.getElementById('bereken');//bind aan JS
+        bereken.addEventListener("click", function(){
+            ajax(gewicht.value, lengte.value);
+        });//call ajax
     </script>
-    </head>
-    <body>
-
-    <p><b>Start typing a name in the input field below:</b></p>
-    <form>
-    First name: <input type="text" onkeyup="showHint(this.value)">
-    </form>
-    <p>Suggestions: <br><span id="txtHint"></span></p>
-
+    <div id="pic">
+      <img src="bmi.jpeg" alt="bmi">
+     </div>
   </body>
 </html>
